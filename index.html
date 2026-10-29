@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Universe Gacha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+  </head>
+  <body>
+    <div class="bg-vignette" aria-hidden="true"></div>
+    <canvas id="particles" class="particles-canvas" aria-hidden="true"></canvas>
+
+    <header class="site-header">
+      <p class="eyebrow">Universe of League of Legends</p>
+      <h1 class="title-main">Universe of Runeterra</h1>
+      <p class="subtitle">Summon a champion. A 5★ is guaranteed at 80.</p>
+    </header>
+
+    <main class="gacha-stage">
+      <section class="pity-panel" aria-live="polite">
+        <div class="pity-label">
+          <span>5★ guarantee</span>
+          <strong id="pity-text">0 / 80</strong>
+        </div>
+        <div class="pity-track">
+          <div class="pity-fill" id="pity-fill"></div>
+        </div>
+        <p class="pity-hint">Base rate 2% · Soft pity begins at pull 70</p>
+      </section>
+
+      <div class="portal-wrap" id="portal" aria-hidden="true">
+        <div class="portal-line"></div>
+        <p class="portal-mark">Runeterra</p>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn-gacha" id="btn-pull-1">Summon ×1</button>
+        <button type="button" class="btn-gacha btn-gacha--ten" id="btn-pull-10">Summon ×10</button>
+        <button type="button" class="btn-muted" id="btn-mute" aria-pressed="false">Sound: On</button>
+      </div>
+
+      <p class="stats-line">
+        <span id="total-pulls">0</span> summons · <span id="collection-count">0</span> collected
+      </p>
+    </main>
+
+    <section class="catalog-section">
+      <div class="catalog-header">
+        <h2>Champion Archive</h2>
+        <div class="catalog-tabs" role="tablist">
+          <button type="button" class="tab active" data-filter="all">All</button>
+          <button type="button" class="tab" data-filter="5">5★</button>
+          <button type="button" class="tab" data-filter="4">4★</button>
+        </div>
+      </div>
+      <div class="catalog-grid" id="catalog-grid"></div>
+    </section>
+
+    <footer class="site-footer">
+      Fan project. League of Legends is a trademark of Riot Games. Champion stories from the
+      <a href="https://wiki.leagueoflegends.com/en-us/" target="_blank" rel="noopener">League of Legends Wiki</a>.
+      Open this page through a local server.
+    </footer>
+
+    <div class="matchfound hidden" id="summon-stage" aria-hidden="true">
+      <div class="mf-veil"></div>
+      <div class="mf-flash"></div>
+      <div class="mf-core">
+        <div class="mf-ticks"></div>
+        <svg class="mf-ring" viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="mf-ring-track" cx="100" cy="100" r="92" />
+          <circle class="mf-ring-draw" cx="100" cy="100" r="92" />
+          <circle class="mf-ring-inner" cx="100" cy="100" r="74" />
+        </svg>
+        <div class="mf-shock"></div>
+        <div class="mf-copy">
+          <p class="mf-kicker" id="summon-kicker"></p>
+          <h2 class="mf-title" id="summon-label"></h2>
+          <div class="mf-flare"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lore hidden" id="lore" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="lore-backdrop"></div>
+      <article class="lore-panel">
+        <img class="lore-portrait" id="lore-portrait" alt="" />
+        <div class="lore-copy">
+          <p class="lore-stars" id="lore-stars"></p>
+          <h2 id="lore-name"></h2>
+          <p class="lore-title" id="lore-title"></p>
+          <p class="lore-body" id="lore-body"></p>
+          <button type="button" class="btn-gacha" id="lore-close">Close</button>
+        </div>
+      </article>
+    </div>
+
+    <div class="overlay hidden" id="overlay" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="overlay-backdrop"></div>
+      <div class="overlay-content" id="overlay-content"></div>
+      <button type="button" class="overlay-close" id="overlay-close">Close</button>
+    </div>
+
+    <audio id="sfx-pull" preload="auto"></audio>
+    <audio id="vo-player" preload="auto"></audio>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

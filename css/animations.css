@@ -1,0 +1,477 @@
+@keyframes portalSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes corePulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes cardFlipIn {
+  0% {
+    transform: rotateY(-90deg) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fiveStarFlash {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes rayRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.portal-wrap.is-pulling {
+  animation: portalCharge 1.1s ease-in-out infinite;
+}
+
+.portal-wrap.is-pulling .portal-ring,
+.portal-wrap.is-pulling .portal-runes {
+  animation-duration: 1.4s;
+}
+
+.portal-wrap.is-pulling .portal-core {
+  animation: coreCharge 0.45s ease-in-out infinite;
+}
+
+@keyframes portalCharge {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.08);
+    filter: brightness(1.6);
+  }
+}
+
+@keyframes coreCharge {
+  0%,
+  100% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 1;
+  }
+}
+
+.matchfound {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background: #010a13;
+}
+
+.matchfound.hidden {
+  display: none;
+}
+
+.mf-veil,
+.mf-flash {
+  position: absolute;
+  inset: 0;
+}
+
+.mf-veil {
+  background:
+    radial-gradient(circle at center, rgba(10, 20, 40, 0.2), #010a13 68%),
+    #010a13;
+  opacity: 0;
+}
+
+.matchfound.is-playing .mf-veil {
+  animation: mfVeil 0.35s ease forwards;
+}
+
+.mf-flash {
+  background: radial-gradient(circle, rgba(240, 230, 210, 0.85), transparent 55%);
+  opacity: 0;
+}
+
+.matchfound.is-playing .mf-flash {
+  animation: mfFlash 0.55s ease 0.05s forwards;
+}
+
+.mf-core {
+  position: relative;
+  width: min(92vw, 720px);
+  height: min(92vw, 720px);
+  display: grid;
+  place-items: center;
+}
+
+.mf-ticks,
+.mf-ring,
+.mf-shock {
+  position: absolute;
+  inset: 0;
+}
+
+.mf-ticks {
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(200, 170, 110, 0.85) 0 1.2deg,
+    transparent 1.2deg 6deg
+  );
+  mask: radial-gradient(circle, transparent 68%, #000 69.2%, #000 71.5%, transparent 72.5%);
+  opacity: 0;
+  transform: scale(0.86);
+}
+
+.matchfound.is-playing .mf-ticks {
+  animation: mfTicks 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+.mf-ring {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.mf-ring-track,
+.mf-ring-draw,
+.mf-ring-inner {
+  fill: none;
+}
+
+.mf-ring-track {
+  stroke: rgba(200, 170, 110, 0.18);
+  stroke-width: 1;
+}
+
+.mf-ring-draw {
+  stroke: #c8aa6e;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 578;
+  stroke-dashoffset: 578;
+  filter: drop-shadow(0 0 6px rgba(200, 170, 110, 0.8));
+}
+
+.matchfound.is-playing .mf-ring-draw {
+  animation: mfDraw 0.95s cubic-bezier(0.22, 0.8, 0.2, 1) 0.12s forwards;
+}
+
+.mf-ring-inner {
+  stroke: rgba(240, 230, 210, 0.35);
+  stroke-width: 0.6;
+  opacity: 0;
+}
+
+.matchfound.is-playing .mf-ring-inner {
+  animation: mfInner 0.6s ease 0.7s forwards;
+}
+
+.mf-shock {
+  border-radius: 50%;
+  border: 2px solid rgba(240, 230, 210, 0.7);
+  opacity: 0;
+}
+
+.matchfound.is-playing .mf-shock {
+  animation: mfShock 1.05s ease-out 0.25s forwards;
+}
+
+.mf-copy {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 86%;
+}
+
+.mf-kicker {
+  margin: 0 0 0.65rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffd700;
+  opacity: 0;
+}
+
+.matchfound.is-playing .mf-kicker {
+  animation: mfFade 0.5s ease 0.55s forwards;
+}
+
+.mf-title {
+  margin: 0 auto;
+  max-width: 17rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(0.95rem, 2.2vw, 1.35rem);
+  line-height: 1.45;
+  color: #fff6d0;
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 18px rgba(255, 215, 0, 0.55);
+  opacity: 0;
+  transform: scale(1.08);
+}
+
+.mf-title:empty {
+  display: none;
+}
+
+.matchfound.is-playing .mf-title {
+  animation: mfTitle 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.32s forwards;
+}
+
+.matchfound--5 .mf-ring-draw {
+  stroke: #ffd700;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.9));
+}
+
+.matchfound--5 .mf-ring-inner {
+  stroke: rgba(255, 215, 0, 0.55);
+}
+
+.matchfound--5 .mf-ticks {
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(255, 215, 0, 0.95) 0 1.2deg,
+    transparent 1.2deg 6deg
+  );
+}
+
+.matchfound--5 .mf-flare {
+  background: linear-gradient(90deg, transparent, #fff 20%, #ffd700 50%, #fff 80%, transparent);
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.95);
+}
+
+.mf-flare {
+  height: 2px;
+  width: 0;
+  margin: 0.85rem auto 0;
+  background: linear-gradient(90deg, transparent, #fff 20%, #f0e6d2 50%, #fff 80%, transparent);
+  box-shadow: 0 0 18px rgba(240, 230, 210, 0.9);
+  opacity: 0;
+}
+
+.matchfound.is-playing .mf-flare {
+  animation: mfFlare 0.7s ease 0.55s forwards;
+}
+
+@keyframes mfVeil {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mfFlash {
+  0% {
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.72;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes mfDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes mfInner {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mfTicks {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes mfShock {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.45);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes mfTitle {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes mfFlare {
+  0% {
+    width: 0;
+    opacity: 1;
+  }
+  100% {
+    width: min(62vw, 420px);
+    opacity: 0.9;
+  }
+}
+
+@keyframes mfFade {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cardSlam {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.portal-wrap.is-pulling .portal-ring--outer {
+  animation-duration: 0.8s;
+}
+
+.portal-wrap.is-pulling--5 {
+  animation: shake 0.5s ease;
+}
+
+.portal-wrap.is-pulling--5 .portal-core {
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.7), transparent 70%);
+}
+
+.reveal-card__inner.animate-in {
+  animation: cardSlam 0.55s ease forwards;
+}
+
+.overlay--five .overlay-backdrop {
+  background: radial-gradient(circle at center, rgba(255, 215, 0, 0.15), rgba(0, 0, 0, 0.92));
+}
+
+.five-star-flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99;
+  background: radial-gradient(circle, rgba(255, 255, 220, 0.5), transparent 60%);
+  animation: fiveStarFlash 0.8s ease forwards;
+}
+
+.five-star-rays {
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(255, 215, 0, 0.08),
+    transparent,
+    rgba(255, 215, 0, 0.12),
+    transparent
+  );
+  animation: rayRotate 8s linear infinite;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  pointer-events: none;
+  z-index: 101;
+  animation: confettiFall 1.2s ease forwards;
+}
+
+@keyframes confettiFall {
+  to {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.catalog-card,
+.multi-item,
+.reveal-card {
+  cursor: pointer;
+}
